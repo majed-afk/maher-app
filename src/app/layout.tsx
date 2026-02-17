@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Cairo, Nunito } from "next/font/google";
+import { IBM_Plex_Sans_Arabic, Nunito } from "next/font/google";
 import "./globals.css";
 
-const cairo = Cairo({
+const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ["arabic", "latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-cairo",
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  variable: "--font-ibm-plex-arabic",
   display: "swap",
 });
 
@@ -45,10 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ar" dir="rtl" className={`${cairo.variable} ${nunito.variable}`}>
+    <html lang="ar" dir="rtl" className={`${ibmPlexArabic.variable} ${nunito.variable}`}>
       <body
         className="antialiased"
-        style={{ fontFamily: "var(--font-cairo), sans-serif" }}
+        style={{ fontFamily: "var(--font-ibm-plex-arabic), sans-serif" }}
       >
         {children}
       </body>
