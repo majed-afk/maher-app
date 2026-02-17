@@ -52,7 +52,7 @@ export default function Header({ locale }: HeaderProps) {
               >
                 🦁
               </motion.span>
-              <span className="text-2xl md:text-3xl font-black bg-gradient-to-r from-[#7C5CFC] to-[#FF6B9D] bg-clip-text text-transparent">
+              <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#7C5CFC] to-[#FF6B9D] bg-clip-text text-transparent">
                 {isRTL ? "ماهر" : "Maher"}
               </span>
             </Link>

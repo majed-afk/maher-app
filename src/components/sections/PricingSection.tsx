@@ -21,7 +21,7 @@ export default function PricingSection({ locale }: PricingProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#2D2D3F] mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D2D3F] mb-4">
             {isRTL ? "خطط بسيطة " : "Simple Plans "}
             <span className="bg-gradient-to-r from-[#7C5CFC] to-[#4DA6FF] bg-clip-text text-transparent">
               {isRTL ? "تناسب الجميع" : "for Everyone"}
@@ -66,7 +66,7 @@ export default function PricingSection({ locale }: PricingProps) {
 
                 {/* Price */}
                 <div className="mb-6">
-                  <span className={`text-4xl font-black ${isPopular ? "text-white" : "text-[#2D2D3F]"}`}>
+                  <span className={`text-4xl font-bold ${isPopular ? "text-white" : "text-[#2D2D3F]"}`}>
                     {plan.currency}{plan.price}
                   </span>
                   {plan.period && (

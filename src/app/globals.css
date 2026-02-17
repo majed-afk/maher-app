@@ -60,8 +60,9 @@ body {
   background-color: var(--color-bg-primary);
   color: var(--color-text-primary);
   font-family: var(--font-body-ar);
-  line-height: 1.7;
+  line-height: 1.8;
   overflow-x: hidden;
+  word-spacing: 0.05em;
 }
 
 [dir="ltr"] body {

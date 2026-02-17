@@ -39,7 +39,7 @@ export default function FeaturesSection({ locale }: FeaturesProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#2D2D3F] mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D2D3F] mb-4">
             {isRTL ? "لماذا يحب الأطفال " : "Why Do Kids Love "}
             <span className="bg-gradient-to-r from-[#7C5CFC] to-[#FF6B9D] bg-clip-text text-transparent">
               {isRTL ? "ماهر؟" : "Maher?"}

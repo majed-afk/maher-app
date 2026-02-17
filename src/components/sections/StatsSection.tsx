@@ -47,7 +47,7 @@ function AnimatedCounter({ value, decimal, suffix }: { value: number; decimal?: 
   }, [isInView, value, decimal]);
 
   return (
-    <span ref={ref} className="text-3xl sm:text-4xl font-black text-[#2D2D3F]">
+    <span ref={ref} className="text-3xl sm:text-4xl font-bold text-[#2D2D3F]">
       {decimal ? count.toFixed(1) : count.toLocaleString()}
       <span className="text-[#7C5CFC]">{suffix}</span>
     </span>

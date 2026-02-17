@@ -29,7 +29,7 @@ export default function HowItWorks({ locale }: HowItWorksProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#2D2D3F] mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D2D3F] mb-4">
             {isRTL ? "كيف يعمل " : "How Does "}
             <span className="bg-gradient-to-r from-[#FF8C42] to-[#7C5CFC] bg-clip-text text-transparent">
               {isRTL ? "ماهر؟" : "Maher Work?"}

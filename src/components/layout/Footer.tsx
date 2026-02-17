@@ -58,7 +58,7 @@ export default function Footer({ locale }: FooterProps) {
           <div className="lg:col-span-2">
             <Link href={isRTL ? "/" : "/en"} className="inline-flex items-center gap-2 mb-5">
               <span className="text-3xl">🦁</span>
-              <span className="text-2xl font-black bg-gradient-to-r from-[#9D85FD] to-[#FF8FB5] bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-[#9D85FD] to-[#FF8FB5] bg-clip-text text-transparent">
                 {isRTL ? "ماهر" : "Maher"}
               </span>
             </Link>

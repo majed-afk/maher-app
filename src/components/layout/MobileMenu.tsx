@@ -38,7 +38,7 @@ export default function MobileMenu({ isOpen, onClose, locale }: MobileMenuProps)
               <div className="flex items-center justify-between p-5 border-b border-gray-100">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">🦁</span>
-                  <span className="text-2xl font-black bg-gradient-to-r from-[#7C5CFC] to-[#FF6B9D] bg-clip-text text-transparent">
+                  <span className="text-2xl font-bold bg-gradient-to-r from-[#7C5CFC] to-[#FF6B9D] bg-clip-text text-transparent">
                     {isRTL ? "ماهر" : "Maher"}
                   </span>
                 </div>

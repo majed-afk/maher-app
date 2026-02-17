@@ -27,7 +27,7 @@ export default function FAQSection({ locale }: FAQProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#2D2D3F] mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D2D3F] mb-4">
             {isRTL ? "الأسئلة " : "Frequently Asked "}
             <span className="bg-gradient-to-r from-[#7C5CFC] to-[#4DA6FF] bg-clip-text text-transparent">
               {isRTL ? "الشائعة" : "Questions"}

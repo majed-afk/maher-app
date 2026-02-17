@@ -63,7 +63,7 @@ export default function HeroSection({ locale }: HeroProps) {
               {isRTL ? "مدعوم بالذكاء الاصطناعي" : "Powered by AI"}
             </motion.div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-snug mb-6">
               <span className="bg-gradient-to-r from-[#7C5CFC] via-[#FF6B9D] to-[#FF8C42] bg-clip-text text-transparent">
                 {t.title}
               </span>

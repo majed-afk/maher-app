@@ -39,7 +39,7 @@ export default function DownloadCTA({ locale }: DownloadCTAProps) {
             🦁
           </motion.div>
 
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-snug">
             {isRTL
               ? "حمّل ماهر الآن وابدأ رحلة طفلك!"
               : "Download Maher Now and Start Your Child's Journey!"}

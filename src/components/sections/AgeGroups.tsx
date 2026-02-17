@@ -27,7 +27,7 @@ export default function AgeGroups({ locale }: AgeGroupsProps) {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-[#2D2D3F] mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D2D3F] mb-4">
             {isRTL ? "مسارات تعلّم " : "Learning Paths "}
             <span className="bg-gradient-to-r from-[#44D4A0] via-[#4DA6FF] to-[#7C5CFC] bg-clip-text text-transparent">
               {isRTL ? "مصممة لكل عمر" : "Designed for Every Age"}
@@ -54,7 +54,7 @@ export default function AgeGroups({ locale }: AgeGroupsProps) {
               >
                 <div className="text-center mb-6">
                   <span className="text-6xl block mb-4">{group.emoji}</span>
-                  <h3 className="text-2xl font-black text-[#2D2D3F]">{group.name}</h3>
+                  <h3 className="text-2xl font-bold text-[#2D2D3F]">{group.name}</h3>
                   <span className={`inline-block mt-2 px-4 py-1 rounded-full text-sm font-bold ${colors.bg} ${colors.text}`}>
                     {group.range}
                   </span>
