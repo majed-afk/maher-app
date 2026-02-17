@@ -9,10 +9,16 @@
     "start": "next start",
     "lint": "next lint"
   },
-  "keywords": ["education", "ai", "kids", "arabic"],
+  "keywords": [
+    "education",
+    "ai",
+    "kids",
+    "arabic"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.96.0",
     "@types/node": "^25.2.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

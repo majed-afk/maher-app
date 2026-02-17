@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Smartphone, Play } from "lucide-react";
+import { Mail, CheckCircle, AlertCircle, Loader2 } from "lucide-react";
+import { useState } from "react";
 
 interface DownloadCTAProps {
   locale: "ar" | "en";
@@ -9,9 +10,50 @@ interface DownloadCTAProps {
 
 export default function DownloadCTA({ locale }: DownloadCTAProps) {
   const isRTL = locale === "ar";
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error" | "duplicate">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !email.includes("@")) {
+      setStatus("error");
+      setErrorMessage(isRTL ? "الرجاء إدخال بريد إلكتروني صحيح" : "Please enter a valid email");
+      return;
+    }
+
+    setStatus("loading");
+
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name }),
+      });
+
+      const data = await res.json();
+
+      if (res.status === 201) {
+        setStatus("success");
+        setEmail("");
+        setName("");
+      } else if (res.status === 409) {
+        setStatus("duplicate");
+        setErrorMessage(isRTL ? data.error : data.errorEn);
+      } else {
+        setStatus("error");
+        setErrorMessage(isRTL ? data.error : data.errorEn);
+      }
+    } catch {
+      setStatus("error");
+      setErrorMessage(isRTL ? "حدث خطأ في الاتصال" : "Connection error");
+    }
+  };
 
   return (
-    <section className="relative overflow-hidden py-20 px-4" dir={isRTL ? "rtl" : "ltr"}>
+    <section id="waitlist" className="relative overflow-hidden py-20 px-4" dir={isRTL ? "rtl" : "ltr"}>
       {/* Background Gradient */}
       <div
         className="absolute inset-0"
@@ -41,44 +83,93 @@ export default function DownloadCTA({ locale }: DownloadCTAProps) {
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-snug">
             {isRTL
-              ? "حمّل ماهر الآن وابدأ رحلة طفلك!"
-              : "Download Maher Now and Start Your Child's Journey!"}
+              ? "كن أول من يجرّب ماهر!"
+              : "Be the First to Try Maher!"}
           </h2>
 
           <p className="text-lg text-white/80 mb-10 max-w-xl mx-auto">
             {isRTL
-              ? "مجاني للتجربة - بدون بطاقة ائتمانية"
-              : "Free to try - No credit card required"}
+              ? "سجّل في قائمة الانتظار وسنُعلمك فور إطلاق التطبيق"
+              : "Join the waitlist and we'll notify you when the app launches"}
           </p>
 
-          {/* Store Buttons */}
-          <div className="flex flex-wrap justify-center gap-4">
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 px-6 py-4 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow"
+          {/* Waitlist Form */}
+          {status === "success" ? (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="flex flex-col items-center gap-3 p-6 bg-white/20 backdrop-blur-sm rounded-2xl max-w-md mx-auto"
             >
-              <Smartphone className="w-7 h-7 text-[#2D2D3F]" />
-              <div className={isRTL ? "text-right" : "text-left"}>
-                <div className="text-[10px] text-[#6B7280]">{isRTL ? "حمّل من" : "Download on the"}</div>
-                <div className="text-base font-bold text-[#2D2D3F]">App Store</div>
-              </div>
-            </motion.a>
+              <CheckCircle className="w-12 h-12 text-white" />
+              <p className="text-xl font-bold text-white">
+                {isRTL ? "تم التسجيل بنجاح! 🎉" : "Successfully registered! 🎉"}
+              </p>
+              <p className="text-white/80">
+                {isRTL ? "سنُرسل لك إشعاراً عند الإطلاق" : "We'll notify you when we launch"}
+              </p>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit} className="max-w-md mx-auto space-y-3">
+              {/* Name Input */}
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder={isRTL ? "الاسم (اختياري)" : "Name (optional)"}
+                className="w-full px-5 py-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all"
+              />
 
-            <motion.a
-              href="#"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-3 px-6 py-4 bg-white rounded-xl shadow-xl hover:shadow-2xl transition-shadow"
-            >
-              <Play className="w-7 h-7 text-[#2D2D3F] fill-[#2D2D3F]" />
-              <div className={isRTL ? "text-right" : "text-left"}>
-                <div className="text-[10px] text-[#6B7280]">{isRTL ? "احصل عليه من" : "Get it on"}</div>
-                <div className="text-base font-bold text-[#2D2D3F]">Google Play</div>
+              {/* Email Input + Submit */}
+              <div className="flex flex-col sm:flex-row gap-3">
+                <div className="relative flex-1">
+                  <Mail className={`absolute top-1/2 -translate-y-1/2 w-5 h-5 text-white/60 ${isRTL ? "right-4" : "left-4"}`} />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (status === "error" || status === "duplicate") setStatus("idle");
+                    }}
+                    placeholder={isRTL ? "بريدك الإلكتروني" : "Your email"}
+                    required
+                    className={`w-full py-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-xl text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition-all ${isRTL ? "pr-12 pl-5" : "pl-12 pr-5"}`}
+                  />
+                </div>
+
+                <motion.button
+                  type="submit"
+                  disabled={status === "loading"}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="px-8 py-4 bg-white text-[#7C5CFC] font-bold rounded-xl shadow-xl hover:shadow-2xl transition-all disabled:opacity-70 flex items-center justify-center gap-2 whitespace-nowrap"
+                >
+                  {status === "loading" ? (
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                  ) : (
+                    isRTL ? "سجّل الآن" : "Join Now"
+                  )}
+                </motion.button>
               </div>
-            </motion.a>
-          </div>
+
+              {/* Error/Duplicate Message */}
+              {(status === "error" || status === "duplicate") && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 justify-center text-white/90"
+                >
+                  <AlertCircle className="w-4 h-4" />
+                  <span className="text-sm">{errorMessage}</span>
+                </motion.div>
+              )}
+
+              <p className="text-xs text-white/50 mt-2">
+                {isRTL
+                  ? "لن نشارك بريدك مع أي طرف آخر"
+                  : "We won't share your email with anyone"}
+              </p>
+            </form>
+          )}
         </motion.div>
       </div>
     </section>
