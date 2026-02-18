@@ -14,7 +14,7 @@ export default function TestimonialsSection({ locale }: TestimonialsProps) {
 
   return (
     <section className="section-padding bg-[#FFF8F0]" dir={isRTL ? "rtl" : "ltr"}>
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ export default function TestimonialsSection({ locale }: TestimonialsProps) {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D2D3F] mb-4">
             {isRTL ? "ماذا يقول الأهل عن " : "What Do Parents Say About "}
             <span className="bg-gradient-to-r from-[#FF8C42] to-[#FF6B9D] bg-clip-text text-transparent">
-              {isRTL ? "ماهر؟" : "Maher?"}
+              {isRTL ? "مهرة؟" : "Mohra?"}
             </span>
           </h2>
         </motion.div>

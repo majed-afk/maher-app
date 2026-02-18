@@ -38,7 +38,7 @@ export default function Header({ locale }: HeaderProps) {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
             ? "bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 border-b border-white/20"
-            : "bg-transparent"
+            : "bg-white/50 backdrop-blur-md"
         }`}
         dir={isRTL ? "rtl" : "ltr"}
       >
@@ -53,7 +53,7 @@ export default function Header({ locale }: HeaderProps) {
                 🦁
               </motion.span>
               <span className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-[#7C5CFC] to-[#FF6B9D] bg-clip-text text-transparent">
-                {isRTL ? "ماهر" : "Maher"}
+                {isRTL ? "مهرة" : "Mohra"}
               </span>
             </Link>
 

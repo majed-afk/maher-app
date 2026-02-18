@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Maher | Your Child's Smart Learning Friend",
+  title: "Mohra | Your Smart Learning Companion",
   description:
     "An AI-powered educational platform that turns studying into a fun adventure for kids aged 3-12. Holy Quran, Arabic, Math, Science, English, and Life Skills.",
   keywords: [
-    "Maher",
+    "Mohra",
     "kids education",
     "AI learning",
     "Quran memorization",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "children learning",
   ],
   openGraph: {
-    title: "Maher | Your Child's Smart Learning Friend",
+    title: "Mohra | Your Smart Learning Companion",
     description:
       "An AI-powered educational platform for kids aged 3-12",
     type: "website",

@@ -22,7 +22,7 @@ export default function HowItWorks({ locale }: HowItWorksProps) {
 
   return (
     <section id="how-it-works" className="section-padding bg-[#FFF8F0]" dir={isRTL ? "rtl" : "ltr"}>
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -32,7 +32,7 @@ export default function HowItWorks({ locale }: HowItWorksProps) {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D2D3F] mb-4">
             {isRTL ? "كيف يعمل " : "How Does "}
             <span className="bg-gradient-to-r from-[#FF8C42] to-[#7C5CFC] bg-clip-text text-transparent">
-              {isRTL ? "ماهر؟" : "Maher Work?"}
+              {isRTL ? "مهرة؟" : "Mohra Work?"}
             </span>
           </h2>
           <p className="text-lg text-[#6B7280] max-w-2xl mx-auto">
@@ -42,7 +42,7 @@ export default function HowItWorks({ locale }: HowItWorksProps) {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-stretch">
           {data.map((step, index) => {
             const Icon = iconMap[step.icon];
             return (
@@ -61,7 +61,7 @@ export default function HowItWorks({ locale }: HowItWorksProps) {
                   </div>
                 )}
 
-                <div className="bg-white rounded-2xl shadow-md p-6 text-center card-hover">
+                <div className="bg-white rounded-2xl shadow-md p-6 text-center card-hover h-full flex flex-col items-center">
                   {/* Step Number */}
                   <div className="w-10 h-10 rounded-full flex items-center justify-center mx-auto mb-4 text-white font-bold text-sm"
                     style={{ background: "linear-gradient(135deg, #7C5CFC 0%, #9D85FD 100%)" }}
@@ -75,7 +75,7 @@ export default function HowItWorks({ locale }: HowItWorksProps) {
                   </div>
 
                   <h3 className="text-lg font-bold text-[#2D2D3F] mb-2">{step.title}</h3>
-                  <p className="text-sm text-[#6B7280]">{step.description}</p>
+                  <p className="text-sm text-[#6B7280] flex-grow">{step.description}</p>
                 </div>
               </motion.div>
             );

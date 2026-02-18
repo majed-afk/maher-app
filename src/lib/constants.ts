@@ -183,15 +183,15 @@ export const subjects = {
 // ===== How It Works =====
 export const howItWorks = {
   ar: [
-    { step: 1, icon: "download", title: "حمّل التطبيق", description: "حمّل ماهر مجانًا من المتجر" },
+    { step: 1, icon: "download", title: "حمّل التطبيق", description: "حمّل مهرة مجانًا من المتجر" },
     { step: 2, icon: "user-plus", title: "أنشئ ملف طفلك", description: "أدخل العمر والمستوى الدراسي" },
-    { step: 3, icon: "wand-sparkles", title: "ماهر يختار المحتوى", description: "الذكاء الاصطناعي يحدد المسار المناسب" },
+    { step: 3, icon: "wand-sparkles", title: "مهرة يختار لك المحتوى", description: "الذكاء الاصطناعي يحدد المسار المناسب" },
     { step: 4, icon: "rocket", title: "ابدأ رحلة التعلم!", description: "يتعلم طفلك بطريقة ممتعة وتفاعلية" },
   ],
   en: [
-    { step: 1, icon: "download", title: "Download the App", description: "Download Maher for free from the store" },
+    { step: 1, icon: "download", title: "Download the App", description: "Download Mohra for free from the store" },
     { step: 2, icon: "user-plus", title: "Create Child Profile", description: "Enter age and education level" },
-    { step: 3, icon: "wand-sparkles", title: "Maher Picks Content", description: "AI determines the right learning path" },
+    { step: 3, icon: "wand-sparkles", title: "Mohra Picks Content", description: "AI determines the right learning path" },
     { step: 4, icon: "rocket", title: "Start Learning!", description: "Your child learns in a fun, interactive way" },
   ],
 };
@@ -204,7 +204,7 @@ export const testimonials = {
       role: "أم لطفلين",
       avatar: "UA",
       rating: 5,
-      text: "أطفالي أصبحوا يحبون وقت الدراسة! ماهر غيّر طريقة تعلمهم بالكامل.",
+      text: "أطفالي أصبحوا يحبون وقت الدراسة! مهرة غيّر طريقة تعلمهم بالكامل.",
     },
     {
       name: "أبو سارة",
@@ -225,7 +225,7 @@ export const testimonials = {
       role: "أب لطفل",
       avatar: "KA",
       rating: 5,
-      text: "ابني تحسن في الرياضيات بشكل ملحوظ خلال شهر واحد فقط. شكرًا ماهر!",
+      text: "ابني تحسن في الرياضيات بشكل ملحوظ خلال شهر واحد فقط. شكرًا مهرة!",
     },
   ],
   en: [
@@ -234,7 +234,7 @@ export const testimonials = {
       role: "Mother of Two",
       avatar: "UA",
       rating: 5,
-      text: "My kids love study time now! Maher completely changed how they learn.",
+      text: "My kids love study time now! Mohra completely changed how they learn.",
     },
     {
       name: "Abu Sarah",
@@ -255,7 +255,7 @@ export const testimonials = {
       role: "Father of One",
       avatar: "KA",
       rating: 5,
-      text: "My son improved in math remarkably in just one month. Thank you Maher!",
+      text: "My son improved in math remarkably in just one month. Thank you Mohra!",
     },
   ],
 };
@@ -279,7 +279,7 @@ export const pricing = {
       cta: "ابدأ مجانًا",
     },
     {
-      name: "ماهر بلس",
+      name: "مهرة بلس",
       price: "29.99",
       currency: "ر.س",
       period: "/شهر",
@@ -296,7 +296,7 @@ export const pricing = {
       cta: "اشترك الآن",
     },
     {
-      name: "ماهر عائلي",
+      name: "مهرة عائلي",
       price: "49.99",
       currency: "ر.س",
       period: "/شهر",
@@ -330,7 +330,7 @@ export const pricing = {
       cta: "Start Free",
     },
     {
-      name: "Maher Plus",
+      name: "Mohra Plus",
       price: "7.99",
       currency: "$",
       period: "/mo",
@@ -347,7 +347,7 @@ export const pricing = {
       cta: "Subscribe Now",
     },
     {
-      name: "Maher Family",
+      name: "Mohra Family",
       price: "12.99",
       currency: "$",
       period: "/mo",
@@ -370,16 +370,16 @@ export const pricing = {
 export const faq = {
   ar: [
     {
-      question: "ما هو تطبيق ماهر؟",
-      answer: "ماهر هو منصة تعليمية ذكية للأطفال من 3 إلى 12 سنة، تستخدم الذكاء الاصطناعي لتقديم تجربة تعلم شخصية وممتعة تشمل القرآن الكريم، اللغة العربية، الرياضيات، العلوم، الإنجليزية، والمهارات الحياتية.",
+      question: "ما هو تطبيق مهرة؟",
+      answer: "مهرة منصة تعليمية ذكية للأطفال من 3 إلى 12 سنة، تستخدم الذكاء الاصطناعي لتقديم تجربة تعلم شخصية وممتعة تشمل القرآن الكريم، اللغة العربية، الرياضيات، العلوم، الإنجليزية، والمهارات الحياتية.",
     },
     {
       question: "هل التطبيق آمن لأطفالي؟",
-      answer: "نعم، بيئة ماهر آمنة 100%. لا توجد إعلانات، المحتوى مراقب ومفلتر بالكامل، ولا يوجد تواصل مع غرباء. كل المحتوى مناسب للأعمار المستهدفة ومراجع من متخصصين.",
+      answer: "نعم، بيئة مهرة آمنة 100%. لا توجد إعلانات، المحتوى مراقب ومفلتر بالكامل، ولا يوجد تواصل مع غرباء. كل المحتوى مناسب للأعمار المستهدفة ومراجع من متخصصين.",
     },
     {
       question: "كيف يتكيف الذكاء الاصطناعي مع مستوى طفلي؟",
-      answer: "يقوم ماهر بتحليل أداء طفلك في الاختبارات والأنشطة، ثم يعدّل صعوبة المحتوى تلقائيًا. إذا أتقن طفلك موضوعًا، ينتقل للأصعب. وإذا واجه صعوبة، يقدم شرحًا إضافيًا وتمارين مبسطة.",
+      answer: "يقوم مهرة بتحليل أداء طفلك في الاختبارات والأنشطة، ثم يعدّل صعوبة المحتوى تلقائيًا. إذا أتقن طفلك موضوعًا، ينتقل للأصعب. وإذا واجه صعوبة، يقدم شرحًا إضافيًا وتمارين مبسطة.",
     },
     {
       question: "هل يمكنني متابعة تقدم طفلي؟",
@@ -387,7 +387,7 @@ export const faq = {
     },
     {
       question: "هل يمكنني استخدام حساب واحد لأكثر من طفل؟",
-      answer: "في الخطة المجانية وماهر بلس، الحساب مخصص لطفل واحد. أما خطة ماهر عائلي فتتيح إضافة حتى 4 أطفال بملفات شخصية منفصلة ومسارات تعلم مستقلة.",
+      answer: "في الخطة المجانية ومهرة بلس، الحساب مخصص لطفل واحد. أما خطة مهرة عائلي فتتيح إضافة حتى 4 أطفال بملفات شخصية منفصلة ومسارات تعلم مستقلة.",
     },
     {
       question: "هل التطبيق يعمل بدون إنترنت؟",
@@ -396,16 +396,16 @@ export const faq = {
   ],
   en: [
     {
-      question: "What is Maher?",
-      answer: "Maher is a smart educational platform for children aged 3-12, using AI to provide a personalized and fun learning experience covering Holy Quran, Arabic, Math, Science, English, and Life Skills.",
+      question: "What is Mohra?",
+      answer: "Mohra is a smart educational platform for children aged 3-12, using AI to provide a personalized and fun learning experience covering Holy Quran, Arabic, Math, Science, English, and Life Skills.",
     },
     {
       question: "Is the app safe for my children?",
-      answer: "Yes, Maher is 100% safe. No ads, fully monitored and filtered content, and no contact with strangers. All content is age-appropriate and reviewed by specialists.",
+      answer: "Yes, Mohra is 100% safe. No ads, fully monitored and filtered content, and no contact with strangers. All content is age-appropriate and reviewed by specialists.",
     },
     {
       question: "How does the AI adapt to my child's level?",
-      answer: "Maher analyzes your child's performance in tests and activities, then automatically adjusts content difficulty. If mastered, it moves to harder topics. If struggling, it provides extra explanation and simplified exercises.",
+      answer: "Mohra analyzes your child's performance in tests and activities, then automatically adjusts content difficulty. If mastered, it moves to harder topics. If struggling, it provides extra explanation and simplified exercises.",
     },
     {
       question: "Can I track my child's progress?",
@@ -413,7 +413,7 @@ export const faq = {
     },
     {
       question: "Can I use one account for multiple children?",
-      answer: "On Free and Maher Plus plans, the account is for one child. Maher Family plan allows up to 4 children with separate profiles and independent learning paths.",
+      answer: "On Free and Mohra Plus plans, the account is for one child. Mohra Family plan allows up to 4 children with separate profiles and independent learning paths.",
     },
     {
       question: "Does the app work offline?",

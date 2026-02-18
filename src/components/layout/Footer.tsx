@@ -16,7 +16,7 @@ const footerData = {
       { title: "الدعم", links: [{ label: "الأسئلة الشائعة", href: "#faq" }, { label: "تواصل معنا", href: "#" }, { label: "الشروط والأحكام", href: "/terms" }, { label: "سياسة الخصوصية", href: "/privacy" }] },
     ],
     madeWith: "صُنع بحب في السعودية",
-    copyright: `جميع الحقوق محفوظة © ${new Date().getFullYear()} ماهر`,
+    copyright: `جميع الحقوق محفوظة © ${new Date().getFullYear()} مهرة`,
   },
   en: {
     description: "A smart educational platform for children aged 3-12. We make learning fun using AI.",
@@ -25,7 +25,7 @@ const footerData = {
       { title: "Support", links: [{ label: "FAQ", href: "#faq" }, { label: "Contact Us", href: "#" }, { label: "Terms of Service", href: "/terms" }, { label: "Privacy Policy", href: "/privacy" }] },
     ],
     madeWith: "Made with love in Saudi Arabia",
-    copyright: `All rights reserved © ${new Date().getFullYear()} Maher`,
+    copyright: `All rights reserved © ${new Date().getFullYear()} Mohra`,
   },
 };
 
@@ -59,7 +59,7 @@ export default function Footer({ locale }: FooterProps) {
             <Link href={isRTL ? "/" : "/en"} className="inline-flex items-center gap-2 mb-5">
               <span className="text-3xl">🦁</span>
               <span className="text-2xl font-bold bg-gradient-to-r from-[#9D85FD] to-[#FF8FB5] bg-clip-text text-transparent">
-                {isRTL ? "ماهر" : "Maher"}
+                {isRTL ? "مهرة" : "Mohra"}
               </span>
             </Link>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">{data.description}</p>

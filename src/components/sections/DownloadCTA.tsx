@@ -83,8 +83,8 @@ export default function DownloadCTA({ locale }: DownloadCTAProps) {
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-snug">
             {isRTL
-              ? "كن أول من يجرّب ماهر!"
-              : "Be the First to Try Maher!"}
+              ? "كن أول من يجرّب مهرة!"
+              : "Be the First to Try Mohra!"}
           </h2>
 
           <p className="text-lg text-white/80 mb-10 max-w-xl mx-auto">

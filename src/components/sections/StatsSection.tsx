@@ -58,7 +58,7 @@ export default function StatsSection({ locale }: StatsProps) {
   const data = stats[locale];
 
   return (
-    <section className="relative -mt-16 z-10 max-w-6xl mx-auto px-4">
+    <section className="relative -mt-16 z-10 w-full max-w-6xl mx-auto px-4">
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -32,7 +32,7 @@ export default function FeaturesSection({ locale }: FeaturesProps) {
 
   return (
     <section id="features" className="section-padding" dir={isRTL ? "rtl" : "ltr"}>
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -42,7 +42,7 @@ export default function FeaturesSection({ locale }: FeaturesProps) {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2D2D3F] mb-4">
             {isRTL ? "لماذا يحب الأطفال " : "Why Do Kids Love "}
             <span className="bg-gradient-to-r from-[#7C5CFC] to-[#FF6B9D] bg-clip-text text-transparent">
-              {isRTL ? "ماهر؟" : "Maher?"}
+              {isRTL ? "مهرة؟" : "Mohra?"}
             </span>
           </h2>
           <p className="text-lg text-[#6B7280] max-w-2xl mx-auto">
@@ -63,7 +63,7 @@ export default function FeaturesSection({ locale }: FeaturesProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-7 shadow-md shadow-black/5 border border-gray-100 card-hover group"
+                className="bg-white rounded-2xl p-7 shadow-md shadow-black/5 border border-gray-100 card-hover group flex flex-col h-full"
               >
                 <div
                   className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 transition-transform group-hover:scale-110"
@@ -72,7 +72,7 @@ export default function FeaturesSection({ locale }: FeaturesProps) {
                   <Icon className="w-7 h-7" style={{ color }} />
                 </div>
                 <h3 className="text-xl font-bold text-[#2D2D3F] mb-3">{feature.title}</h3>
-                <p className="text-[#6B7280] leading-relaxed">{feature.description}</p>
+                <p className="text-[#6B7280] leading-relaxed flex-grow">{feature.description}</p>
               </motion.div>
             );
           })}
