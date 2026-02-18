@@ -18,6 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.76.0",
     "@stripe/stripe-js": "^8.7.0",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.96.0",

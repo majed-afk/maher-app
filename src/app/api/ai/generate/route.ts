@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { openai } from "@/lib/openai";
+import { anthropic } from "@/lib/anthropic";
 
 const supabaseAdmin = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -133,9 +133,29 @@ ${flashcardSchema}
   "topicEn": "Topic title in English"
 }
 
-مهم: أرجع JSON صالح فقط بدون أي نص إضافي.`;
+مهم: أرجع JSON صالح فقط بدون أي نص إضافي. لا تضف أي شرح أو تعليق خارج الـ JSON.`;
 
   return prompt;
+}
+
+// ─── Helper: Fetch image and convert to base64 ───────────
+async function imageUrlToBase64(url: string): Promise<{ base64: string; mediaType: string }> {
+  const response = await fetch(url);
+  const arrayBuffer = await response.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+  const base64 = buffer.toString("base64");
+
+  // Detect media type from content-type header or URL
+  const contentType = response.headers.get("content-type") || "";
+  let mediaType = "image/jpeg";
+  if (contentType.includes("png")) mediaType = "image/png";
+  else if (contentType.includes("gif")) mediaType = "image/gif";
+  else if (contentType.includes("webp")) mediaType = "image/webp";
+  else if (url.includes(".png")) mediaType = "image/png";
+  else if (url.includes(".gif")) mediaType = "image/gif";
+  else if (url.includes(".webp")) mediaType = "image/webp";
+
+  return { base64, mediaType };
 }
 
 // ─── POST /api/ai/generate ────────────────────────────────
@@ -185,30 +205,40 @@ export async function POST(req: NextRequest) {
     // Build the prompt
     const prompt = buildPrompt(ageGroup as "3-6" | "6-9" | "9-12", type);
 
-    // Call OpenAI GPT-4o with vision
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+    // Convert image URL to base64 for Claude API
+    const { base64, mediaType } = await imageUrlToBase64(imageUrl);
+
+    // Call Claude with vision
+    const response = await anthropic.messages.create({
+      model: "claude-sonnet-4-20250514",
+      max_tokens: 4096,
       messages: [
         {
           role: "user",
           content: [
-            { type: "text", text: prompt },
             {
-              type: "image_url",
-              image_url: { url: imageUrl, detail: "high" },
+              type: "image",
+              source: {
+                type: "base64",
+                media_type: mediaType as "image/jpeg" | "image/png" | "image/gif" | "image/webp",
+                data: base64,
+              },
+            },
+            {
+              type: "text",
+              text: prompt,
             },
           ],
         },
       ],
-      response_format: { type: "json_object" },
-      max_tokens: 4096,
-      temperature: 0.7,
     });
 
-    const rawContent = response.choices[0]?.message?.content || "{}";
+    // Extract text content from Claude's response
+    const textBlock = response.content.find((block) => block.type === "text");
+    const rawContent = textBlock && "text" in textBlock ? textBlock.text : "{}";
     const tokensUsed =
-      (response.usage?.prompt_tokens || 0) +
-      (response.usage?.completion_tokens || 0);
+      (response.usage?.input_tokens || 0) +
+      (response.usage?.output_tokens || 0);
 
     // Parse the AI response
     let parsed: {
@@ -249,7 +279,7 @@ export async function POST(req: NextRequest) {
           generated_quiz: quiz.length > 0 ? quiz : null,
           generated_flashcards: flashcards.length > 0 ? flashcards : null,
           subject_hint: parsed.topicAr || parsed.topicEn || null,
-          ai_model: "gpt-4o",
+          ai_model: "claude-sonnet-4-20250514",
           tokens_used: tokensUsed,
           status: "completed",
           completed_at: new Date().toISOString(),
@@ -264,7 +294,7 @@ export async function POST(req: NextRequest) {
       topicEn: parsed.topicEn || "",
       scanId,
       metadata: {
-        model: "gpt-4o",
+        model: "claude-sonnet-4-20250514",
         tokensUsed,
         questionsCount: quiz.length,
         flashcardsCount: flashcards.length,
