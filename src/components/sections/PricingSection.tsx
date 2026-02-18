@@ -1,8 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Crown } from "lucide-react";
+import { Check, Crown, Loader2 } from "lucide-react";
 import { pricing } from "@/lib/constants";
+import { trackInitiateCheckout } from "@/lib/tracking";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface PricingProps {
   locale: "ar" | "en";
@@ -11,10 +14,55 @@ interface PricingProps {
 export default function PricingSection({ locale }: PricingProps) {
   const isRTL = locale === "ar";
   const data = pricing[locale];
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const router = useRouter();
+
+  const handleSubscribe = async (planIndex: number) => {
+    // Free plan — go to login/signup page
+    if (planIndex === 0) {
+      router.push("/auth/login");
+      return;
+    }
+
+    const plan = planIndex === 1 ? "plus" : "family";
+    setLoadingPlan(plan);
+
+    // Fire conversion event before redirect
+    trackInitiateCheckout({
+      plan,
+      value: plan === "plus" ? 29.99 : 49.99,
+      currency: "SAR",
+    });
+
+    try {
+      const res = await fetch("/api/payments/create-checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          plan,
+          userId: "guest",
+          email: "guest@mohra.app",
+          locale,
+        }),
+      });
+
+      const json = await res.json();
+
+      if (json.url) {
+        window.location.href = json.url;
+      } else {
+        alert(isRTL ? "يرجى تسجيل الدخول أولاً للاشتراك" : "Please log in first to subscribe");
+      }
+    } catch {
+      alert(isRTL ? "حدث خطأ، يرجى المحاولة لاحقاً" : "An error occurred, please try again later");
+    } finally {
+      setLoadingPlan(null);
+    }
+  };
 
   return (
     <section id="pricing" className="section-padding" dir={isRTL ? "rtl" : "ltr"}>
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -37,6 +85,9 @@ export default function PricingSection({ locale }: PricingProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center max-w-5xl mx-auto">
           {data.map((plan, index) => {
             const isPopular = plan.popular;
+            const planKey = index === 1 ? "plus" : index === 2 ? "family" : null;
+            const isLoading = planKey && loadingPlan === planKey;
+
             return (
               <motion.div
                 key={index}
@@ -95,19 +146,24 @@ export default function PricingSection({ locale }: PricingProps) {
                 </ul>
 
                 {/* CTA Button */}
-                <motion.a
-                  href="#"
+                <motion.button
+                  onClick={() => handleSubscribe(index)}
+                  disabled={!!isLoading}
                   whileHover={{ scale: 1.03 }}
                   whileTap={{ scale: 0.97 }}
-                  className={`block text-center w-full py-3.5 rounded-xl font-bold text-sm transition-all ${
+                  className={`block text-center w-full py-3.5 rounded-xl font-bold text-sm transition-all cursor-pointer disabled:opacity-70 ${
                     isPopular
                       ? "bg-white text-[#7C5CFC] hover:bg-white/90 shadow-lg"
                       : "text-white shadow-md shadow-[#7C5CFC]/20 hover:shadow-[#7C5CFC]/40"
                   }`}
                   style={!isPopular ? { background: "linear-gradient(135deg, #7C5CFC 0%, #9D85FD 100%)" } : {}}
                 >
-                  {plan.cta}
-                </motion.a>
+                  {isLoading ? (
+                    <Loader2 className="w-5 h-5 animate-spin mx-auto" />
+                  ) : (
+                    plan.cta
+                  )}
+                </motion.button>
               </motion.div>
             );
           })}
