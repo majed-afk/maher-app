@@ -51,8 +51,8 @@ export default function AuthLoginPage() {
         return;
       }
 
-      // Redirect to home or dashboard
-      router.push("/");
+      // Redirect to dashboard
+      router.push("/dashboard");
       router.refresh();
     } catch {
       setError("حدث خطأ في الاتصال");

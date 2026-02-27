@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Globe } from "lucide-react";
+import { Menu, X, Globe, User } from "lucide-react";
+import { createBrowserClient } from "@supabase/ssr";
 import { navLinks } from "@/lib/constants";
 import MobileMenu from "./MobileMenu";
 
@@ -14,6 +15,7 @@ interface HeaderProps {
 export default function Header({ locale }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const isRTL = locale === "ar";
   const links = navLinks[locale];
@@ -22,6 +24,16 @@ export default function Header({ locale }: HeaderProps) {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const supabase = createBrowserClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    );
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      setIsLoggedIn(!!user);
+    });
   }, []);
 
   useEffect(() => {
@@ -82,15 +94,26 @@ export default function Header({ locale }: HeaderProps) {
                 <span className="hidden sm:inline">{isRTL ? "EN" : "عربي"}</span>
               </Link>
 
-              <motion.a
-                href="#pricing"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="hidden sm:inline-flex items-center px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-lg shadow-[#7C5CFC]/25 hover:shadow-[#7C5CFC]/40 transition-shadow"
-                style={{ background: "linear-gradient(135deg, #7C5CFC 0%, #FF6B9D 100%)" }}
-              >
-                {isRTL ? "جرّب مجانًا" : "Try Free"}
-              </motion.a>
+              {isLoggedIn ? (
+                <Link
+                  href="/dashboard"
+                  className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-lg shadow-[#7C5CFC]/25 hover:shadow-[#7C5CFC]/40 transition-shadow"
+                  style={{ background: "linear-gradient(135deg, #7C5CFC 0%, #FF6B9D 100%)" }}
+                >
+                  <User className="w-4 h-4" />
+                  {isRTL ? "لوحتي" : "Dashboard"}
+                </Link>
+              ) : (
+                <motion.a
+                  href="#pricing"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="hidden sm:inline-flex items-center px-5 py-2.5 text-sm font-bold text-white rounded-xl shadow-lg shadow-[#7C5CFC]/25 hover:shadow-[#7C5CFC]/40 transition-shadow"
+                  style={{ background: "linear-gradient(135deg, #7C5CFC 0%, #FF6B9D 100%)" }}
+                >
+                  {isRTL ? "جرّب مجانًا" : "Try Free"}
+                </motion.a>
+              )}
 
               <motion.button
                 whileTap={{ scale: 0.9 }}

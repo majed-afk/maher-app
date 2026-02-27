@@ -30,17 +30,34 @@ export async function middleware(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   const isAdminRoute = request.nextUrl.pathname.startsWith("/admin");
-  const isLoginPage = request.nextUrl.pathname === "/admin/login";
+  const isAdminLoginPage = request.nextUrl.pathname === "/admin/login";
+  const isDashboardRoute = request.nextUrl.pathname.startsWith("/dashboard");
+  const isAuthLoginPage = request.nextUrl.pathname === "/auth/login";
 
-  if (isAdminRoute && !isLoginPage && !user) {
+  // Admin routes protection
+  if (isAdminRoute && !isAdminLoginPage && !user) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin/login";
     return NextResponse.redirect(url);
   }
 
-  if (isLoginPage && user) {
+  if (isAdminLoginPage && user) {
     const url = request.nextUrl.clone();
     url.pathname = "/admin";
+    return NextResponse.redirect(url);
+  }
+
+  // Dashboard routes protection
+  if (isDashboardRoute && !user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/auth/login";
+    return NextResponse.redirect(url);
+  }
+
+  // Redirect logged-in users from login page to dashboard
+  if (isAuthLoginPage && user) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
@@ -50,5 +67,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/:path*"],
+  matcher: ["/admin/:path*", "/dashboard/:path*", "/auth/:path*"],
 };
